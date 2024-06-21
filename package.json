@@ -12,6 +12,11 @@
         "react-scripts": "5.0.1",
         "web-vitals": "^2.1.4"
     },
+    "author": {
+        "name": "Tim Richards",
+        "email": "richards@cs.umass.edu"
+    },
+
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
