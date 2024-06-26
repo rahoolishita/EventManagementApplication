@@ -1,3 +1,4 @@
+// App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
@@ -40,19 +41,21 @@ const AppContent = ({ handleLogin }) => {
   return (
     <>
       {!hideHeaderAndFooter && <Header />}
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<Signup />} />
-          <Route path="/login" element={<Login onLogin={handleLogin} />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/create-event" element={<EventForm />} />
-          <Route path="/event-list" element={<EventList />} />
-          <Route path="/guest-list" element={<GuestList />} />
-          <Route path="/task-list" element={<TaskList />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+      <div className="content">
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<Signup />} />
+            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/create-event" element={<EventForm />} />
+            <Route path="/event-list" element={<EventList />} />
+            <Route path="/guest-list" element={<GuestList />} />
+            <Route path="/task-list" element={<TaskList />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
       </div>
       {!hideHeaderAndFooter && <Footer />}
     </>
