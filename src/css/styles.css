@@ -1,12 +1,14 @@
 .about-container {
-    padding: 20px;
+    padding: 25px;
     background-color: #f9f9f9;
     border-radius: 8px;
+    height: 100%;
     margin: 20px 0;
 }
 
 .about-container h1 {
     margin-bottom: 20px;
+    height: 100%;
 }
 
 .about-container p {
@@ -17,7 +19,7 @@
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
-    margin: 20px 0;
+    margin: 80px;
 }
 
 .contact-container h1 {
@@ -34,7 +36,7 @@
     text-align: center;
     padding: 1rem;
     width: 100%;
-    position: fixed;
+    position: relative;
     bottom: 0;
 }
 
@@ -169,4 +171,33 @@ button:hover {
 .signup form button:hover,
 .login form button:hover {
     background-color: #0056b3;
+}
+
+.home {
+    padding: 50px;
+    background-color: #ffffff;
+    /* Example background color */
+    border-radius: 8px;
+    margin: 120px;
+    height: 100%;
+    /* Centering the content */
+    /* Example maximum width */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Example box shadow */
+}
+
+.home h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.main-create {
+    justify-content: center;
+    width: 100%;
+}
+
+.create-event-container {
+    margin: 30px;
+    max-width: 50%;
 }
