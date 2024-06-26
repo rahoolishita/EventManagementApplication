@@ -1,21 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const EventList = () => {
-  // This would be fetched from the backend
-  const events = [
-    { id: 1, title: 'Event 1', date: '2023-01-01', time: '10:00', description: 'Event 1 Description' },
-    { id: 2, title: 'Event 2', date: '2023-02-01', time: '12:00', description: 'Event 2 Description' },
-  ];
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetchEvents();
+  }, []); // Fetch events when component mounts
+
+  const fetchEvents = () => {
+    fetch('http://localhost:5000/api/events')
+      .then(response => response.json())
+      .then(data => {
+        setEvents(data); // Assuming data is an array of events
+      })
+      .catch(error => {
+        console.error('Error fetching events:', error);
+      });
+  };
+
+  const handleDeleteEvent = (eventId) => {
+    fetch(`http://localhost:5000/api/events/${eventId}`, {
+      method: 'DELETE',
+    })
+      .then(response => response.json())
+      .then(deletedEvent => {
+        console.log('Event deleted successfully:', deletedEvent);
+        // Update events state by filtering out the deleted event
+        setEvents(events.filter(event => event._id !== deletedEvent._id));
+      })
+      .catch(error => {
+        console.error('Error deleting event:', error);
+      });
+  };
 
   return (
     <div>
       <h2>Event List</h2>
       <ul>
         {events.map(event => (
-          <li key={event.id}>
-            <h3>{event.title}</h3>
-            <p>{event.date} at {event.time}</p>
-            <p>{event.description}</p>
+          <li key={event._id}>
+            <h3>{event.Title}</h3>
+            <p>{new Date(event.Date).toLocaleDateString()} at {event.Time}</p>
+            <p>{event.Description}</p>
+            <button onClick={() => handleDeleteEvent(event._id)}>Delete</button>
           </li>
         ))}
       </ul>
