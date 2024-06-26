@@ -1,0 +1,2 @@
+[Wed, 26 Jun 2024 12:00:41 GMT] [info] [<0.000.0>] pouchdb-server has started on http://127.0.0.1:5984/
+[Wed, 26 Jun 2024 12:00:41 GMT] [info] [<0.000.0>] navigate to http://127.0.0.1:5984/_utils for the Fauxton UI.
