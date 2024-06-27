@@ -2,7 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/Header';
-import Footer from './components/Footer';
+import Footer from './components/footer';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Home from './components/Home';
@@ -36,11 +36,11 @@ const App = () => {
 
 const AppContent = ({ handleLogin }) => {
   const location = useLocation();
-  const hideHeaderAndFooter = location.pathname === '/' || location.pathname === '/login';
+  const hideHeaderAndfooter = location.pathname === '/' || location.pathname === '/login';
 
   return (
     <>
-      {!hideHeaderAndFooter && <Header />}
+      {!hideHeaderAndfooter && <Header />}
       <div className="content">
         <div className="container">
           <Routes>
@@ -57,7 +57,7 @@ const AppContent = ({ handleLogin }) => {
           </Routes>
         </div>
       </div>
-      {!hideHeaderAndFooter && <Footer />}
+      {!hideHeaderAndfooter && <Footer />}
     </>
   );
 };
