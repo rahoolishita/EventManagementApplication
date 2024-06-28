@@ -1,5 +1,5 @@
 .about-container {
-    padding: 25px;
+    padding: 50px;
     background-color: #f9f9f9;
     border-radius: 8px;
     height: 100%;
@@ -16,7 +16,7 @@
 }
 
 .contact-container {
-    padding: 20px;
+    padding: 25px;
     background-color: #f9f9f9;
     border-radius: 8px;
     margin: 80px;
