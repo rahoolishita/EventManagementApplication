@@ -2,10 +2,33 @@ import React, { useState, useEffect } from 'react';
 
 const GuestList = () => {
     const [guests, setGuests] = useState([]);
-    const [guest, setGuest] = useState({ name: '', rsvp: '' });
+    const [guest, setGuest] = useState({ name: '', rsvp: '', eventId: '' });
+    const [events, setEvents] = useState([]);
+    const [eventMap, setEventMap] = useState({});
 
     useEffect(() => {
-        // Fetch guests from backend when component mounts
+        fetchEvents();
+        fetchGuests();
+    }, []); // Fetch events and guests when component mounts
+
+    const fetchEvents = () => {
+        fetch('http://localhost:5000/api/events')
+            .then(response => response.json())
+            .then(data => {
+                setEvents(data); // Assuming data is an array of events
+                // Create a map of event IDs to event titles for quick lookup
+                const eventMap = data.reduce((acc, event) => {
+                    acc[event._id] = event.Title;
+                    return acc;
+                }, {});
+                setEventMap(eventMap);
+            })
+            .catch(error => {
+                console.error('Error fetching events:', error);
+            });
+    };
+
+    const fetchGuests = () => {
         fetch('http://localhost:5000/api/guests')
             .then(response => response.json())
             .then(data => {
@@ -14,7 +37,7 @@ const GuestList = () => {
             .catch(error => {
                 console.error('Error fetching guests:', error);
             });
-    }, []); // Empty dependency array ensures this effect runs only once after initial render
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,6 +57,8 @@ const GuestList = () => {
             .then(response => response.json())
             .then(newGuest => {
                 setGuests([...guests, newGuest]); // Assuming newGuest is the new guest 
+                setGuest({ name: '', rsvp: '', eventId: '' }); // Reset the guest form
+                fetchGuests(); // Reload guests after adding a new guest
             })
             .catch(error => {
                 console.error('Error adding guest:', error);
@@ -69,6 +94,22 @@ const GuestList = () => {
         option value = "No" > No < /option> <
         /select> <
         /div> <
+        div className = "form-group" >
+        <
+        label > Select Event < /label> <
+        select name = "eventId"
+        value = { guest.eventId }
+        onChange = { handleChange }
+        required >
+        <
+        option value = "" > Select Event < /option> {
+            events.map(event => ( <
+                option key = { event._id }
+                value = { event._id } > { event.Title } < /option>
+            ))
+        } <
+        /select> <
+        /div> <
         button type = "submit" > Add Guest < /button> <
         /form> <
         div style = {
@@ -85,6 +126,8 @@ const GuestList = () => {
             { border: '1px solid #ddd', padding: '8px', textAlign: 'left' } } > Name < /th> <
         th style = {
             { border: '1px solid #ddd', padding: '8px', textAlign: 'left' } } > RSVP < /th> <
+        th style = {
+            { border: '1px solid #ddd', padding: '8px', textAlign: 'left' } } > Event < /th> <
         /tr> <
         /thead> <
         tbody style = {
@@ -96,6 +139,8 @@ const GuestList = () => {
                     { border: '1px solid #ddd', padding: '8px' } } > { guest.name } < /td> <
                 td style = {
                     { border: '1px solid #ddd', padding: '8px' } } > { guest.rsvp } < /td> <
+                td style = {
+                    { border: '1px solid #ddd', padding: '8px' } } > { eventMap[guest.eventId] } < /td> <
                 /tr>
             ))
         } <
