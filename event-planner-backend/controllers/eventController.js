@@ -1,8 +1,14 @@
 const Event = require('../models/Event');
+const Guest = require('../models/Guest');
+const Task = require('../models/Task');
 
 const getAllEvents = async(req, res) => {
     try {
         const events = await Event.getAllEvents();
+        for (const event of events) {
+            event.guests = await Guest.getGuestsByEventId(event._id);
+            event.tasks = await Task.getTasksByEventId(event._id);
+        }
         res.json(events);
     } catch (err) {
         console.error(err.message);
